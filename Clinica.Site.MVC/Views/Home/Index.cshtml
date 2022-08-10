@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Home";
+}
+
+<div class="section section_carrossel">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="carousel hidden-xs slide" id="fullcarousel-example" data-interval="false" data-ride="carousel">
+                <div class="carousel-inner">
+                    @{
+
+                        if (ViewBag.carrossel != null)
+                        {
+                            foreach (var item in ViewData["carrossel"] as IEnumerable<Clinica.Site.Negocio.Estrutura.Carrossel>)
+                            {
+                                <figure class='@item.Item'>
+                                    <img src='@item.Imagem' class="img-responsive">
+                                    <img src='@item.Imagem' class="img-responsive">
+                                    <figcaption class="carousel-caption">
+                                        <h2 class="text-center"></h2>
+                                        <p>@item.Texto</p>
+                                    </figcaption>
+                                </figure>
+                            }
+                        }
+                    }
+                </div>
+                <a class="left carousel-control" href="#fullcarousel-example" data-slide="prev"><i class="icon-prev fa fa-angle-left"></i></a>
+                <a class="right carousel-control" href="#fullcarousel-example" data-slide="next"><i class="icon-next fa beat beat fa-heartbeat"></i></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden-sm hidden-xs section">
+    <div class="row text-center">
+        <div class="col-md-6 col-md-offset-3 text-center">
+            <div class="btn-group btn-group-justified btn-group-lg">
+                <a href="/Servicos/Consultas" class="btn btn-block btn-padrao-verde">Consultas</a>
+                <a href="/Exames/ExamesQueRealizamos" class="btn btn-block btn-padrao-verde">Exames</a>
+                <a href="/Preparos/Preparos" class="btn btn-block btn-padrao-verde">Como se Preparar</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="hidden-lg hidden-md section">
+    <div class="row text-center">
+        <div class="col-md-10 col-md-offset-1 text-center">
+            <a href="/Servicos/Consultas" class="btn btn-block btn-padrao-verde">Consultas</a>
+            <a href="/Exames/ExamesQueRealizamos" class="btn btn-block btn-padrao-verde">Exames</a>
+            <a href="/Preparos/Index" class="btn btn-block btn-padrao-verde">Como se Preparar</a>
+        </div>
+    </div>
+</div>
+
+<div class="section">
+    <div class="row">
+        <div class="col-md-12">
+            <ul class="breadcrumb text-center">
+                <li>
+                    <a href="#" class="titulo-paginas"><i class="fa fa-lg fa-phone" aria-hidden="true"></i>(11) 5543-4654</a>
+                </li>
+                <li><a href="/Home" class="titulo-paginas"><i class="fa fa-map-marker fa-lg"></i>&nbsp;Rua Pintassilgo, nº 516, 11º Andar - Moema. CEP: 04514-032 - São Paulo - SP.</a></li>
+            </ul>
+        </div>
+    </div>
+</div>
+
+<!--Testimonials starting-->
+<div id="testimonials">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-2 col-md-offset-1 text-right hidden-xs hidden-sm" style="padding-top:20px;">
+                <h1><i class="fa fa-newspaper-o fa-3x"></i></h1>
+            </div>
+            <div class="col-md-8">
+                <div class="testimonials-list">
+                    @{
+                        if (ViewBag.noticias != null)
+                        {
+                            foreach (var item in ViewData["noticias"] as IEnumerable<Clinica.Site.Negocio.Estrutura.Noticias>)
+                            {
+                                <!-- Single Testimonial -->
+                                <div class="single-testimonial">
+                                    <div class="testimonial-holder">
+                                        <div class="testimonial-content">
+                                            @if (item.Link.IsEmpty())
+                                            {
+                                                <p>@item.Texto</p>
+                                            }
+                                            else
+                                            {
+                                                <p><a class="text-muted" target="_blank" href=@item.Link>@item.Texto</a></p>
+                                            }
+
+                                        </div>
+                                    </div>
+                                </div>
+                            }
+                        }}
+                    <!-- End of Single Testimonial -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

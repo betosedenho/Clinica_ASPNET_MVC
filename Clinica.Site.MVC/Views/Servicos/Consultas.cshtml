@@ -1,0 +1,73 @@
+﻿@model IEnumerable<Clinica.Site.Negocio.Cadastro.Especialidade>
+@{
+	ViewBag.Title = "Consultas";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+	int i = 0;
+}
+<div class="section section_nossas_especialidades">
+	<div class="container-fluid">
+		<div class="row row-titulos-paginas">
+			<div class="col-md-12 text-center">
+				<h2 class="font-titulo-paginas"><i class="fa fa-stethoscope" aria-hidden="true"></i> Consultas</h2>
+			</div>
+		</div>
+	</div>
+
+	<div class="container">
+		<div class="row"><br />
+			<div class="col-md-12">
+				<p class="text-center">
+					Através de um cuidado interdisciplinar, olhamos o paciente por inteiro, promovendo sua saúde efetiva e prevenindo o desenvolvimento de doenças.
+				</p>
+			</div>
+		</div>
+		<hr>
+	</div>
+
+    <div class="row">
+        <div class="container">
+            <p class="text-center"><a href="/Servicos/Agendamentos" class="titulo-paginas-font-14"><i class="fa fa fa-id-card-o" aria-hidden="true"></i> Faça seu agendamento AQUI</a></p>
+        </div>
+    </div>
+
+	<div class="section">
+		<div class="container">
+			<table class="table table-responsive" align="center">
+				<thead></thead>
+				<tbody>
+					@foreach (var item in Model)
+					{
+						if (i % 2 == 0)
+						{
+							<tr class="bg-responsive-tables">
+								<td width="5%"><i class="fa fa-check text-success fa-2x" aria-hidden="true"></i></td>
+								<td width="20%">@item.Nome</td>
+								<td width="75%" class="hidden-xs text-justify">@item.Descricao</td>
+							</tr>
+						}
+						else
+						{
+							<tr class="active">
+								<td width="5%"><i class="fa fa-check text-success fa-2x" aria-hidden="true"></i></td>
+								<td width="20%">@item.Nome</td>
+								<td width="75%" class="hidden-xs text-justify">@item.Descricao</td>
+							</tr>
+						}
+						i++;
+					}
+				</tbody>
+			</table>
+
+		</div>
+	</div>
+
+	<div class="section">
+		<div class="row">
+			<div class="container">
+                <p class="text-center"><a href="/Servicos/Agendamentos" class="titulo-paginas-font-14"><i class="fa fa fa-id-card-o" aria-hidden="true"></i> Faça seu agendamento AQUI</a></p>
+			</div>
+
+		</div>
+	</div>
+
+</div>

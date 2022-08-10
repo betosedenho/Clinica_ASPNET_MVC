@@ -1,0 +1,35 @@
+﻿<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    @Html.Partial("_Favicons")
+    @Html.Partial("_Meta")
+    <title>Clínica Médica - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-43762701-1"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+        gtag('config', 'UA-43762701-1');
+    </script>
+</head>
+<body>
+    @Html.Partial("_Cabecalho")
+    <section id="conteudo">
+        <main>
+            <div class="container body-content" style="width:100%; padding:0px;">
+                @RenderBody()
+
+            </div>
+        </main>
+    </section>
+    @Html.Partial("_Rodape")
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/fileupload")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

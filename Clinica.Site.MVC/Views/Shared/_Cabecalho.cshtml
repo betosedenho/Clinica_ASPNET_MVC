@@ -1,0 +1,96 @@
+﻿
+<section>
+    <nav class="navbar navbar-default navbar-fixed-top">
+        <figure>
+            <a href="/Home" class="navbar-brand"><img alt="Brand" src="~/Imagens/Logos/healthcare-vector_new.png" width="100" height="350" id="brand"></a>
+        </figure>
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-ex-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar-ex-collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li class="dropdown" id="testenav">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lg fa-weixin" aria-hidden="true"></i>&nbsp;Atendimento<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="/Home/FaleConosco/"><i class="fa fa-lg fa-phone"></i> (11) 5543-4654 </a>
+                            </li>
+                            <li class="divider"></li>
+                            <li>
+                                <a href="/Home/FaleConosco/">Fale Conosco</a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-lg fa-users" aria-hidden="true"></i>&nbsp;Clínica Médica<span class="caret"></span></a>
+                        <ul class="dropdown-menu multi-level">
+                            <li><a style="color:gray">Histórico</a></li>
+                            <li><a href="/Servicos/Consultas">Especialidades</a></li>
+                            <li class="divider"></li>
+                            <li class="dropdown-submenu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" style="background-color:#176562">Serviços</a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="/Servicos/Agendamentos">Agendamento</a></li>
+                                    <li><a href="/Servicos/Consultas">Consultas</a></li>
+                                    <li><a href="/Exames/ExamesQueRealizamos">Exames</a></li>
+                                    <li><a href="/Preparos/Preparos">Preparo</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user fa-lg" aria-hidden="true"></i>&nbsp;Pacientes<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="/Servicos/Agendamentos">Agendamento</a></li>
+                            <li class="divider"></li>
+                            <li>
+                                <a style="color:gray">Resultados de exames</a>
+                            </li>
+                            <li>
+                                <a href="/Preparos/Preparos">Preparo de exames</a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle dropdown-login" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><img src="~/Imagens/default/user_placeholder.png" class="img-login"><span class="caret caret-img-login"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                @{
+                                    System.Web.HttpCookie cookie = Request.Cookies["cpfPaciente"];
+                                    if (cookie == null)
+                                    {
+                                    <li><a href="/Admin/Index"><i class="fa fa-sign-in" aria-hidden="true" style="padding:5px;"></i>Fazer LogIn</a></li>
+                                    <li><a href="/Paciente/Create"><i class="fa fa-user" aria-hidden="true" style="padding:5px;"></i>Sou um novo Paciente</a></li>
+                                }
+                                else
+                                {
+                                    <li><a href="/Paciente">Painel</a></li>
+                                    <li><a href="/Autenticacao/LogOff">Sair<i class="fa fa-sign-out fa-1x" aria-hidden="true" style="padding:5px;"></i></a></li>
+                                }
+                                }
+                            </ul>
+                    </li>
+
+
+                    <li style="font-size:9px;" class="text-right">
+                        @{
+                            if (cookie != null)
+                            {
+                                <p class="text-right">Bem vindo(a), @Session["paciente"].ToString()</p>
+                            }
+                        }
+                    </li>
+                    
+                </ul>
+            </div>
+        </div>
+    </nav>
+</section>

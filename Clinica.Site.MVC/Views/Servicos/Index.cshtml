@@ -1,0 +1,101 @@
+﻿@model IEnumerable<Clinica.Site.Negocio.Cadastro.Agendamento>
+
+@{
+    ViewBag.Title = "Agendamentos";
+    Layout = "~/Views/Shared/_DashBoard.cshtml";
+
+}
+
+<section class="section-dashboard">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="titulo-paginas"><i class="fa fa fa-id-card-o fa-1x" aria-hidden="true"></i> Agendamento de Exames ou Consultas</h2>
+            </div>
+        </div><hr>
+    </div>
+
+    <table class="table table-responsive table_historico_dashboard" align="center">
+        <tr class="titulo-paginas-font-11 active">
+
+            <th style="border-bottom:none; width:1%;"></th>
+
+            <th style="vertical-align:middle; text-align:center; width:13%;">@Html.DisplayNameFor(model => model.Nome)</th>
+
+            @*<th style="vertical-align:middle; text-align:center;width:10%;">@Html.DisplayNameFor(model => model.Cpf)</th>*@
+			<th style="vertical-align:middle; text-align:center;width:10%;">@Html.DisplayNameFor(model => model.Consultas)</th>
+
+            @*<th style="vertical-align:middle; text-align:center;width:10%;">E-Mail</th>*@
+			<th style="vertical-align:middle; text-align:center;width:10%;">@Html.DisplayNameFor(model => model.Exames)</th>
+
+			@*<th style="vertical-align:middle; text-align:center;width:10%;">Check-up</th>
+            
+			<th style="vertical-align:middle; text-align:center;width:7%;">É Cliente?</th>*@
+
+            @*<th style="vertical-align:middle; text-align:center;width:10%;">Data de Nascimento</th>*@
+
+            <th style="vertical-align:middle; text-align:center;width:8%;">1ª Opção Data Preferêncial</th>
+
+            <th style="vertical-align:middle; text-align:center;width:8%;">2ª Opção Data Preferêncial</th>
+
+            <th style="vertical-align:middle; text-align:center;width:8%;">3ª Opção Data Preferêncial</th>
+
+			<th style="vertical-align:middle; text-align:center;width:4%;">Ativo</th>
+
+            <th style="vertical-align: middle; width:15%;"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="active threed" style="border-spacing:8px;" >
+                <td style="vertical-align: middle;  border:1px solid lightgrey; border-radius:3px;"></td>
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; border-radius:3px; text-align:center; font-size:11px;">@item.Nome</td>
+
+                @*<td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.Cpf</td>*@
+				<td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.Consultas</td>
+
+                @*<td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.Email</td>*@
+				<td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.Exames</td>
+
+				@*<td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.Checkup</td>
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; border-radius:3px; text-align:center;">
+                    @if (item.EhCliente == true)
+                    {
+                        <p><i class="fa fa-check text-success fa-lg" aria-hidden="true"></i></p>
+                    }
+                </td>*@
+
+                @*<td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.DataNascimento</td>*@
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.DataPreferencial1</td>
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.DataPreferencial2</td>
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; font-size:11px;">@item.DataPreferencial3</td>
+
+				<td style="vertical-align:middle; border:1px solid lightgrey; border-radius:3px; text-align:center;">
+					
+					@if (item.Ativo == true)
+					{
+						<p><i class="fa fa-check text-success fa-lg" aria-hidden="true"></i></p>
+					}
+					else
+					{
+						<p><i class="fa fa-ban text-danger fa-lg" aria-hidden="true"></i></p>
+					}
+				</td>
+				
+                <td style="vertical-align: middle; border:1px solid lightgrey; border-radius:3px;  text-align:center;">
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-padrao-verde btn-sm" })
+					@Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-padrao-verde btn-sm" })
+                    @*@Html.ActionLink("Apagar", "Delete", new { id = item.Id }, new { @class = "btn btn-padrao-verde btn-sm" })*@
+                </td>
+            </tr>
+        }
+
+    </table>
+
+</section>

@@ -1,0 +1,135 @@
+﻿@model IEnumerable<Clinica.Site.Negocio.Estrutura.Carrossel>
+
+@{
+    ViewBag.Title = "Slides";
+    Layout = "~/Views/Shared/_DashBoard.cshtml";
+
+}
+
+<section class="section-dashboard">
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="titulo-paginas"><i class="fa fa-picture-o" aria-hidden="true"></i> Slides em Uso</h2>
+            </div>
+        </div><hr>
+    </div>
+
+    <table class="table table-responsive table_carrossel_dashboard" align="center">
+        <tr class="titulo-paginas">
+            <td style="padding:0px;">
+                <p class="btn btn-padrao-verde btn-sm btn_criar_novo_carrossel" onclick="SetUrlController('/Carrossels/UploadFiles', '/Imagens/Carrossel/', 'Carrossel', '/Carrossels/ConfiguracaoUpload');"><i class="fa fa-plus" aria-hidden="true"></i> Criar</p>
+            </td>
+        </tr>
+    </table>
+
+    <div class="container" id="form_criar_novo_carrossel">
+        <div class="row">
+            <div class="col-md-12" style="border:1px solid lightgrey; box-shadow: 10px 10px 15px grey;">
+                <form class="form-inline" data-toggle="validator" role="form">
+
+                    <div class="form-group" style="padding-top:1px;">
+                        <span class="btn btn-padrao-verde btn-sm fileinput-button">
+                            <span>Selecione a Imagem...</span><input id="fileupload" type="file" name="files" style="border:1px solid;">
+                        </span>
+                    </div>
+
+					<div class="form-group" style="padding-left:0px; padding-right:70px; display:none;">
+						<div id="id">0</div>
+					</div>
+
+                    <div class="form-group" style="padding-left:0px; padding-right:60px;">
+                        <input type="text" class="form-control file_name input-sm" id="file_name" disabled>
+                    </div>
+
+                    <div class="form-group" style="padding-right:60px;padding-top:20px;">
+                        <label for="inputName" class="control-label titulo-paginas-font-11">Texto</label>
+                        <textarea class="form-control input-sm" id="inputTexto" maxlength="400" rows="2" style="width:250px;"></textarea>
+                    </div>
+
+                    <div class="form-group" style="padding-top:20px; padding-right:50px;">
+                        <label for="checkAtivo" class="control-label titulo-paginas-font-11">Mostrar Primeiro</label>
+                        <input id="chkAtivo" type="checkbox">
+                    </div>
+
+                    <div class="form-group" style="padding-top:20px;">
+                        <button type="button" id="salvarcarrossel" class="btn btn-padrao-verde btn-xs">Salvar <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+                        <button type="button" id="btn_cancelar_carrossel" class="btn btn-padrao-verde btn-xs">Cancelar <i class="fa fa-hand-paper-o" aria-hidden="true"></i></button>
+                    </div>
+                    <div class="progress" style="width:340px; height:4px; padding:0px;">
+                        <div class="progress-bar" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100" style="width: 0%;"></div>
+                    </div>
+                </form>
+
+            </div>
+        </div><hr />
+    </div>
+
+    <table class="table table-responsive table_carrossel_dashboard" align="center">
+        <tr class="titulo-paginas-font-11 active">
+
+            <th style="border-bottom:none;"></th>
+
+            <th style="vertical-align:middle; text-align:center; width:30%;">
+                Imagem Atual
+            </th>
+
+            <th style="vertical-align:middle; text-align:center;width:30%;">
+                @Html.DisplayNameFor(model => model.Texto)
+            </th>
+
+            <th style="vertical-align:middle; text-align:center; width:15%">
+                Mostrar Primeiro
+            </th>
+
+            <th style="vertical-align: middle; width:25%"></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr class="active threed" style="border-spacing:8px;">
+                <td style="vertical-align: middle;  border:1px solid lightgrey; border-radius:3px; "></td>
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; border-radius:3px; text-align:center; width:30%">
+                    <img src=@Html.DisplayFor(modelItem => item.Imagem) class="img-responsive img_carrossel_dashbord" />
+                </td>
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; text-align:center; border-radius:3px; width:30%; font-size:11px;">
+                    @Html.DisplayFor(modelItem => item.Texto)
+                </td>
+
+                <td style="vertical-align:middle; border:1px solid lightgrey; border-radius:3px; text-align:center; width:15%">
+                    @if (item.Item == "item active")
+                {
+                        <p><i class="fa fa-check text-success fa-lg" aria-hidden="true"></i></p>
+                    }
+                </td>
+
+                <td style="vertical-align: middle; border:1px solid lightgrey; border-radius:3px;  text-align:center; width:25%">
+                    @Html.ActionLink("Editar", "Edit", new { id = item.Id }, new { @class = "btn btn-padrao-verde btn-sm" })
+                    @Html.ActionLink("Detalhes", "Details", new { id = item.Id }, new { @class = "btn btn-padrao-verde btn-sm" })
+                    @Html.ActionLink("Apagar", "Delete", new { id = item.Id }, new { @class = "btn btn-padrao-verde btn-sm" })
+                </td>
+            </tr>
+        }
+    </table>
+
+    <div class="modal fade" id="modalFail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header modal-header-danger">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <h2><i class="glyphicon glyphicon-thumbs-down"></i> Problemas encontrados!</h2>
+                </div>
+                <div class="modal-body">
+                    <p><h2>Não foi possível salvar essa operação devido a problemas técnicos.</h2></p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">OK</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</section>

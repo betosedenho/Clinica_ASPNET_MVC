@@ -1,0 +1,274 @@
+﻿@model Clinica.Site.Negocio.Cadastro.Agendamento
+
+@{
+	ViewBag.Title = "Alterações";
+	Layout = "~/Views/Shared/_DashBoard.cshtml";
+}
+
+<section class="section-dashboard">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-12 text-center text-danger">
+				<h2 class="titulo-paginas"><i class="fa fa-info-circle" aria-hidden="true"></i> Alteração do Agendamento</h2>
+			</div>
+		</div><hr>
+	</div>
+
+
+	<div class="container">
+		<div class="col-md-12">
+			<div class="form-group">
+				<a href="/Servicos/Index" type="submit" class="btn btn-padrao-verde btn-sm"><i class="fa fa-angle-double-left" aria-hidden="true"></i> Voltar para Lista</a>
+			</div>
+		</div>
+
+		<div class="col-md-8 col-md-offset-2">
+
+			<form class="form-horizontal" data-toggle="validator" role="form">
+				<div id="Id" style="display:none;">@Html.ValueFor(model => model.Id)</div>
+
+				@*<div class="form-group" style="background-color:#ededed; border-spacing:5px; border-radius:15px 15px;">
+					<div class="col-sm-2 text-right">
+						<label for="inputItem" class="control-label titulo-paginas-font-11">Ativa:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						@if (Model.Ativo == true)
+						{
+							<input id="chkAtivo" type="checkbox" checked>
+						}
+						else
+						{
+							<input id="chkAtivo" type="checkbox">
+						}
+
+					</div>
+				</div>*@
+
+				@*<div class="form-group"  style="background-color:#ededed; border-spacing:5px; border-radius:15px 15px;">
+					<div class="col-sm-2 text-right">
+						<label for="inputNome" class="control-label titulo-paginas-font-11">Observações:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<textarea class="form-control input-sm" id="inputObs" maxlength="400" rows="4">@Html.ValueFor(model => model.Observacao)</textarea>
+					</div>
+				</div>*@
+
+					<div class="section">
+
+						<div class="form-group">
+							<div class="col-sm-7 text-left">
+								<label class="control-label titulo-paginas">Informações adicionais:</label>
+							</div>
+						</div>
+
+						<div class="form-group col-md-11" style="background-color:#ededed; border-spacing:5px; border-radius:15px 15px;">
+							<div class="col-sm-2 text-right">
+								<label for="inputItem" class="control-label titulo-paginas-font-11">Ativa:</label>
+							</div>
+							<div class="col-sm-8 input-group">
+								@if (Model.Ativo == true)
+								{
+									<input id="chkAtivo" type="checkbox" checked>
+								}
+								else
+								{
+									<input id="chkAtivo" type="checkbox">
+								}
+
+							</div>
+						</div>
+
+						<div class="form-group" style="background-color:#ededed; border-spacing:5px; border-radius:15px 15px;">
+							<div class="col-sm-2 text-right">
+								<label for="inputNome" class="control-label titulo-paginas-font-11">Observações:</label>
+							</div>
+							<div class="col-sm-8 input-group">
+								<textarea class="form-control input-sm" id="inputObs" maxlength="400" rows="4">@Html.ValueFor(model => model.Observacao)</textarea>
+							</div>
+							
+							<div class="col-sm-2 text-right">
+								<label for="inputData" class="control-label titulo-paginas-font-11">Data:</label>
+							</div>
+							<div class="col-sm-3 col-lg-offset-2 input-group">
+								<input type="text" class="form-control input-sm calendario" id="inputData" value="@Html.ValueFor(model => model.Data)">
+							</div>
+
+							<div class="col-sm-2 text-right">
+								<label for="inputHora" class="control-label titulo-paginas-font-11">Horário:</label>
+							</div>
+							<div class="col-sm-3 col-lg-offset-2 input-group">
+								<input type="text" class="form-control input-sm" id="inputHora" value="@Html.ValueFor(model => model.Horario)">
+							</div>
+
+							<div class="col-sm-2 text-right">
+								<label></label>
+							</div>
+							<div class="col-sm-3 col-lg-offset-2 input-group">
+								<button type="button" class="btn btn-padrao-verde btn_alterar_agendamento">Salvar <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+							</div>
+
+						</div>
+					</div>
+
+
+				<div class="form-group ">
+					<div class="col-sm-4 text-right">
+						<label for="inputNome" class="control-label titulo-paginas-font-11">Nome:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.Nome)</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Cpf:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.Cpf)</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Data de Nascimento:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.DataNascimento)</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Telefone:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.Telefone)</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Celular:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.Celular)</p>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Consultas:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.Consultas)</p>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Exames:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.Exames)</p>
+					</div>
+				</div>
+
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Check-up:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.Checkup)</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">1ª Opção Data Preferêncial:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.DataPreferencial1).ToHtmlString()</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">2ª Opção Data Preferêncial:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.DataPreferencial2).ToHtmlString()</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">3ª Opção Data Preferêncial:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.DataPreferencial3).ToHtmlString()</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Período Preferêncial:</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.PeriodoPreferencial)</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputTexto" class="control-label titulo-paginas-font-11">Como Conheceu a clínica?</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						<p>@Html.ValueFor(model => model.ComoConheceu)</p>
+					</div>
+				</div>
+
+				<div class="form-group">
+					<div class="col-sm-4 text-right">
+						<label for="inputItem" class="control-label titulo-paginas-font-11">É Cliente</label>
+					</div>
+					<div class="col-sm-8 input-group">
+						@Html.CheckBoxFor(model => model.EhCliente, new { @disabled = "disabled" })
+					</div>
+				</div>
+
+				@*<div class="form-group">
+					<div class="col-sm-3">
+					</div>
+					<div class="col-sm-8" style="padding-left:0px;">
+						<button type="button" class="btn btn-padrao-verde btn_alterar_agendamento">Salvar <i class="fa fa-floppy-o" aria-hidden="true"></i></button>
+					</div>
+				</div>*@
+				<br /><br />
+			</form>
+
+		</div>
+
+	</div>
+</section>
+
+<div class="modal fade" id="modalFail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<div class="modal-header modal-header-danger">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+				<h2><i class="glyphicon glyphicon-thumbs-down"></i> Erro!</h2>
+			</div>
+			<div class="modal-body">
+				<p>Sua alteração não foi efetivada.</p>
+				<p>Favor entrar em contato com suporte técnico.</p>
+			</div>
+			<div class="modal-footer">
+				<button type="button" class="btn btn-danger pull-right" data-dismiss="modal">OK</button>
+			</div>
+		</div>
+	</div>
+</div>

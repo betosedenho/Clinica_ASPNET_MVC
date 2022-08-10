@@ -1,0 +1,72 @@
+﻿@{
+    ViewBag.Title = "Login";
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    @Html.Partial("_Favicons")
+    @Html.Partial("_Meta")
+    <title>Clínica Médica - @ViewBag.Title</title>
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jqueryuicss")
+    @Scripts.Render("~/bundles/jqueryui")
+</head>
+<body>
+    <section id="conteudo">
+        <main>
+            <div class="container body-content" style="width:100%; padding:0px;">
+                <section class="section-dashboard center-block">
+
+                    <div class="container center-block">
+                        <div class="row">
+                            <div class="col-md-12 text-center">
+                                <h2 class="titulo-paginas"><i class="fa fa-sign-in" aria-hidden="true"></i> Login</h2>
+                            </div>
+                        </div><hr>
+                    </div>
+                    <div class="container center-block" id="form_login">
+                        <div class="row">
+                            <div class="col-md-4"></div>
+                            <div class="col-md-4" style="border:1px solid lightgrey; box-shadow: 10px 10px 15px grey;">
+                                @using (Html.BeginForm())
+                                {
+                                    @Html.AntiForgeryToken()
+                                    <br />
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-4">
+                                            @Html.TextBox("login", "", new { @class = "login" })
+                                        </div>
+                                    </div>
+                                    <br />
+                                    <div class="form-group hidden">
+                                        <div class="col-md-offset-2 col-md-4">
+                                            @Html.Password("senha", "1", new { placeholder = "Informe a Senha" })
+                                        </div>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <div class="col-md-offset-2 col-md-4">
+                                            <div><input type="submit" value="Entrar" class="btn btn-padrao-verde btn-sm" /></div>
+                                            <div style="font-size:10px; color:darkblue">@Html.ActionLink("Crie seu perfil", "../Paciente/Create")</div>
+                                        </div>
+                                    </div>
+                                    <br />
+                                    @Html.ValidationSummary(true, "", new { @class = "alert alert-danger alert-dismissable" });
+                                    <br />
+                                }
+                            </div>
+                            <div class="col-md-4"></div>
+
+                        </div><hr />
+                    </div>
+                </section>
+            </div>
+        </main>
+    </section>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+</body>
+</html>

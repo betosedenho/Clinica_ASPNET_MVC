@@ -1,0 +1,296 @@
+﻿@model Clinica.Site.MVC.Models.EspecialidadesViewModels
+@{
+	ViewBag.Title = "Agendamentos";
+	Layout = "~/Views/Shared/_Layout.cshtml";
+
+	int i = 0;
+}
+
+<div class="section section_fale_conosco">
+    <div class="container-fluid">
+        <div class="row row-titulos-paginas">
+            <div class="col-md-12 text-center">
+                <h2 class="font-titulo-paginas"><i class="fa fa fa-id-card-o fa-1x" aria-hidden="true"></i>&nbsp;Agendamento de Consulta e/ou Exames</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row"><br />
+            <div class="col-md-12 text-justify">
+                <p>Para agendar sua consulta ou exame, preencha os campos abaixo com seus dados e aguarde nosso contato. Ou, se preferir, entre em contato diretamente com nossa <a href="/Home/FaleConosco" class="text-danger"><b> Central de Relacionamento</b></a>.</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+<div class="section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-8 col-md-offset-2">
+
+                <form class="form-horizontal" role="form" data-toggle="validator">
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputCPF" id="labelCPF" class="control-label titulo-paginas">CPF:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-sm cpf" id="inputCPF" onfocus="Mascara_CPF();" autofocus data-error="Favor informar o número do CPF" placeholder="CPF" required>
+                            <div class="help-block with-errors data-cpf"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputNome" class="control-label titulo-paginas">Nome:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" class="form-control input-sm" maxlength="50" id="inputNome" placeholder="Nome" required data-error="Favor Informar seu Nome">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputEmail" class="control-label titulo-paginas">E-Mail:</label>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="email" class="form-control input-sm" maxlength="50" id="inputEmail" placeholder="E-Mail" @*required data-error="Favor Informar um E-mail"*@>
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label id="labelDtNasc" for="inputDtNasc" class="control-label titulo-paginas">Data de Nascimento:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-sm data" id="inputDtNasc" placeholder="Data de Nascimento" required data-error="Favor Informar a Data de Nascimento" name="Data" onblur="validaDataRequired(this,this.value,'data-data-nascimento')">
+                            @*<input type="text" class="form-control input-sm calendario" id="inputDtNasc" placeholder="Data de Nascimento" data-error="Favor Informar sua Data de Nascimento" required>*@
+                            @*<div class="help-block with-errors"></div>*@
+                            <div class="data-data-nascimento"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputTelefone" id="labelTelefone" class="control-label titulo-paginas">Telefone:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-sm telefones_ddd" onfocus="Mascara_ddd_telefones()" id="inputTelefone" placeholder="(99)9999-9999" data-error="Favor Informar o Telefone" required>
+                            <div class="help-block with-errors data-telefone"></div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputCelular" class="control-label titulo-paginas">Celular:</label>
+                        </div>
+                        <div class="col-md-4">
+                            <input type="text" class="form-control input-sm celular_ddd" id="inputCelular" placeholder="(99)99999-9999">
+                            <div class="help-block with-errors"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputSel" id="labelConheceClinica" class="control-label titulo-paginas">Já é nosso paciente?</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control input-sm" id="inputSel" required data-error="Já conhece a nossa clínica?">
+                                <option value="">Escolha uma opção</option>
+                                <option value="true">Sim</option>
+                                <option value="false">Não</option>
+                            </select>
+                            <div class="help-block with-errors data-conhece-clinica"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="selectConsulta" class="control-label label-consultas titulo-paginas">Consultas:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="multiselect multiselect_consulta">
+                                @foreach (var item in Model.Consultas)
+                                {
+                                    <label><input class="multi-checkbox" type="checkbox" name="consultas[]" id="chkConsulta-@i" value='@item.Nome' /> @item.Nome</label>
+                                    i++;
+                                }
+                                @{
+                                    i = 0;
+                                }
+                            </div>
+                            <div class="campo_obrigtorio_consulta"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="selectExame" class="control-label label-exames titulo-paginas">Exames:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <div class="multiselect multiselect_exames">
+                                @foreach (var item in Model.Exames)
+                                {
+                                    <label><input type="checkbox" name="exames[]" value='@item.Nome' id="chkExame-@i" /> @item.Nome</label>
+                                    i++;
+                                }
+                                @{
+                                    i = 0;
+                                }
+                            </div>
+                            @*<select multiple class="form-control input-sm" id="selectExame" data-error="Favor informar o tipo de Exame." required style="height:70px;">
+                    @foreach (var item in Model.Exames)
+                    {
+                        <option value=@item.Id>@item.Nome</option>
+                    }
+                </select>*@
+                            @*<input type="text" class="form-control input-sm hidden" id="consist_exames" required data-error="teste">*@
+                            <div class="campo_obrigtorio_exames"></div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="selectChkUp" id="labelchkup" class="control-label titulo-paginas">Check-up:</label>
+                        </div>
+                        <div class="col-sm-4">
+                            <select class="form-control input-sm" id="selectChkUp" required data-error="Favor informar a faixa etária">
+                                <option value="">Selecione a faixa etária</option>
+                                <option value="1">Até 30 anos</option>
+                                <option value="2">Mais de 30 anos</option>
+                            </select>
+                            <div class="help-block with-errors data-checkup"></div>
+                        </div>
+                    </div>
+
+
+                    <div class="section">
+
+                        <div class="form-group">
+                            <div class="col-sm-7 text-left">
+                                <label class="control-label titulo-paginas">Informe 3 opções de datas preferenciais:</label>
+                            </div>
+
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-4 text-right">
+                                <label for="input1opcao" class="control-label titulo-paginas-font-11">1ª opção:</label>
+                            </div>
+                            <div class="col-md-2">
+                                @*<input type="text" class="form-control input-sm data calendario" id="input1opcao" placeholder="1ª opção" name="Data" onblur="validaDataNotRequired(this,this.value,'data-opcao-1')">*@
+                                <input type="text" class="form-control input-sm calendario" id="input1opcao" placeholder="1ª opção">
+                                <div class="data-opcao-1"></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 text-right">
+                                <label for="input2opcao" class="control-label titulo-paginas-font-11">2ª opção:</label>
+                            </div>
+                            <div class="col-md-2">
+                                @*<input type="text" class="form-control input-sm data calendario" id="input2opcao" placeholder="2ª opção" name="Data" onblur="validaDataNotRequired(this,this.value, 'data-opcao-2')">*@
+                                <input type="text" class="form-control input-sm data calendario" id="input2opcao" placeholder="2ª opção">
+                                <div class='data-opcao-2'></div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="col-sm-4 text-right">
+                                <label for="input3opcao" class="control-label titulo-paginas-font-11">3ª opção:</label>
+                            </div>
+                            <div class="col-md-2">
+                                @*<input type="text" class="form-control input-sm data" id="calendario" placeholder="3ª opção" name="Data" onblur="validaDataNotRequired(this,this.value, 'data-opcao-3')">*@
+                                <input type="text" class="form-control input-sm data calendario" id="input3opcao" placeholder="3ª opção">
+                                <div class='data-opcao-3'></div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputSelPeriodo" class="control-label titulo-paginas-font-11">Selecione o período preferencial:</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control input-sm" id="inputSelPeriodo">
+                                <option value="0">Indiferente</option>
+                                <option value="1">2ª a 6ª feira, das 7h às 10h</option>
+                                <option value="2">2ª a 6ª feira, das 10h às 13h</option>
+                                <option value="3">2ª a 6ª feira, das 13h às 16h</option>
+                                <option value="4">2ª a 6ª feira, das 16h às 18h</option>
+                                <option value="5">Sábado, das 7h às 11h</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3 text-right">
+                            <label for="inputSelClinica" class="control-label titulo-paginas-font-11">Como conheceu a clínica?</label>
+                        </div>
+                        <div class="col-sm-3">
+                            <select class="form-control input-sm" id="inputSelClinica">
+                                <option value="0">Escolha uma opção</option>
+                                <option value="1">Indicação Médica</option>
+                                <option value="2">Indicação de Parentes e Amigos</option>
+                                <option value="3">Internet</option>
+                                <option value="4">Mídia</option>
+                                <option value="5">Google</option>
+                                <option value="6">Outros</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <div class="col-sm-3">
+                        </div>
+                        <div class="col-sm-3">
+                            <button type="button" id="agendar" disabled class="btn btn-padrao-verde" onclick="SalvarAgendamento(@Model.Exames.Count());" @*salvar_agendamento"*@ @*onclick="NotificacaoAgendamento('Agendamento de Consulta ou Exames');"*@>Agendar <i id="fa-plane" class="fa fa-paper-plane" aria-hidden="true"></i></button>
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<div class="modal fade" id="modalAgendamentoOK" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2><i class="glyphicon glyphicon-thumbs-up"></i> Agendamento</h2>
+            </div>
+            <div class="modal-body">
+                <p id="modal_nome"></p>
+                <p>Recebemos seu pré-agendamento.</p>
+				<p>Logo entraremos em contato para confirmar sua solicitação.</p>
+                <p>Agradecemos o contato!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-padrao-verde pull-right" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="modalEmailFail" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header modal-header-danger">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h2><i class="glyphicon glyphicon-thumbs-down"></i> Agendamento Falhou!</h2>
+            </div>
+            <div class="modal-body">
+                <p>Agendamento não pode ser realizado devido a problemas técnicos.</p>
+                <p>Se preferir, você pode entrar em contato com a clínica através do telefone (11) 5543-4654 ou através de nosso chat.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+

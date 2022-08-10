@@ -1,0 +1,42 @@
+﻿@model System.Web.Mvc.HandleErrorInfo
+@{
+    if (!HttpContext.Current.User.Identity.IsAuthenticated)
+    {
+        Layout = "~/Views/Shared/_Layout.cshtml";
+    }
+    else
+    {
+        Layout = "~/Views/Shared/_DashBoard.cshtml";
+    }
+    ViewBag.Title = "Ops!";
+}
+
+<section class="section-dashboard">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h2 class="titulo-paginas"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Ops! 400 (Bad Request)!</h2>
+            </div>
+        </div><hr>
+    </div>
+    <div class="container">
+        <hgroup class="title">
+            @if (@Model != null)
+            {
+                <h2 class="error">
+                    @Model.Exception
+                </h2>
+            }
+            else
+            {
+                <h2>
+                    <p class="text-justify">
+                        O servidor não conseguiu entender a solicitação requisitada
+                        devido a sintaxe inválida ou outro problema interno.
+                        Contate seu administrador de redes.
+                    </p>
+                </h2>
+            }
+        </hgroup>
+    </div>
+</section>

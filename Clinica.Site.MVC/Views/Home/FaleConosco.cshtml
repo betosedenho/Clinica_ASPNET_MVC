@@ -1,0 +1,81 @@
+﻿@{
+    ViewBag.Title = "Fale Conosco";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+
+}
+<div class="section section_fale_conosco">
+    <div class="container-fluid">
+        <div class="row row-titulos-paginas">
+            <div class="col-md-12 text-center">
+                <h2 class="font-titulo-paginas"><i class="fa fa-phone fa-1x" aria-hidden="true"></i>&nbsp; Fale Conosco</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row"><br />
+            <div class="col-md-12 text-justify">
+                <p>Entre em contato conosco e obtenha informações através da nossa Central de Relacionamento ou, se preferir, tire dúvidas ou dê sugestões preenchendo o formulário abaixo.</p>
+            </div>
+        </div>
+        <hr>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-4 text-center">
+                    <div class="panel panel-default threed">
+                        <div class="panel-heading"><i class="fa fa-clock-o" aria-hidden="true"></i>&nbsp;Horários</div>
+                        <div class="panel-body text-danger" style="font-size:14px;">
+                            
+                                @foreach (var item in ViewData["horarios"] as IEnumerable<Clinica.Site.Negocio.Cadastro.Horarios>) 
+                                {
+                                    if (item.Dia == "Uteis")
+                                    {
+                                        <div>2ª a 6ª das @item.Abertura às @item.Fechamento</div>
+                                    }
+                                    else
+                                    {
+                                        <div>@item.Dia das @item.Abertura às @item.Fechamento</div>
+                                    }
+                                }
+                            
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="panel panel-default threed">
+                        <div class="panel-heading"><i class="fa fa-phone-square" aria-hidden="true"></i>&nbsp;Telefone</div>
+                        <div class="panel-body text-danger" style="font-size:14px; height:70px;">
+                             <div>(11) 5543-4654</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4 text-center">
+                    <div class="panel panel-default threed">
+                        <div class="panel-heading"><i class="fa fa-at" aria-hidden="true"></i>&nbsp;E-mail</div>
+                        <div class="panel-body text-danger" style="font-size:14px; height:70px;">
+                            <div><a href="#" class="text-danger">contato@clinicamedica.com.br</a></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div><hr>
+    </div>
+
+    <div class="container">
+        <hr />
+        <div class="row">
+            <div class="col-md-12 text-center">
+                <h3 class="titulo-paginas"><i class="fa fa-truck fa-lg" aria-hidden="true"></i>&nbsp;PÁGINA EM CONSTRUÇÃO</h3>
+            </div>
+        </div>
+    </div><br />
+
+    <div class="container">
+        <div class="col-md-8 col-md-offset-2">
+            <img src="~/Imagens/default/construcao.jpg" height="500" width="700" />
+        </div>
+    </div>
+</div>

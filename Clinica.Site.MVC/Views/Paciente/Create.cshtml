@@ -1,0 +1,217 @@
+﻿@model Clinica.Site.Negocio.Cadastro.Paciente
+@{
+    var estados = ViewBag.Estado as IEnumerable<Clinica.Site.Negocio.Cadastro.Estado>;
+    var cidades = ViewBag.Estado as IEnumerable<Clinica.Site.Negocio.Cadastro.Cidade>;
+
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="section section_fale_conosco">
+    <div class="container-fluid">
+        <div class="row row-titulos-paginas">
+            <div class="col-md-12 text-center">
+                <h2 class="font-titulo-paginas"><i class="fa fa fa-user-circle-o fa-1x" aria-hidden="true"></i>&nbsp;Novo Paciente</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="row">
+            <br />
+            <div class="col-md-12">
+                <p class="text-center">Realize seu cadastro para aproveitar todos os serviços oferecidos pela clínica.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8 col-md-offset-2">
+                    <form class="form-horizontal" role="form" data-toggle="validator">
+
+                        <div class="form-group text-right">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Cpf:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm cpf" id="Cpf" onfocus="Mascara_CPF();" autofocus data-error="Favor informar o número do CPF" placeholder="CPF" required>
+                                <div class="help-block with-errors data-cpf"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Nome:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm" maxlength="50" id="Nome" placeholder="Nome" required data-error="Favor Informar seu Nome">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("E-mail:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="email" class="form-control input-sm" maxlength="50" id="Email" placeholder="E-Mail">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Data de Nascimento:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm data" id="DataNascimento" placeholder="Data de Nascimento" required data-error="Favor Informar a Data de Nascimento" name="Data" onblur="validaDataRequired(this,this.value,'data-data-nascimento')">
+                                <div class="data-data-nascimento"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Celular:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm celulares_ddd" onfocus="Mascara_ddd_celulares()" id="Celular" placeholder="(99)99999-9999" data-error="Favor Informar um número para contato" required>
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Telefone:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm telefones_ddd" onfocus="Mascara_ddd_telefones()" id="TelefoneFixo" placeholder="(99)9999-9999">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                <label for="inputSel" id="labelConheceClinica" class="control-label titulo-paginas">Já é nosso paciente?</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-control input-sm" name="selpaciente" id="EhPaciente" required>
+                                    <option value="">Escolha uma opção</option>
+                                    <option value="true">Sim</option>
+                                    <option value="false">Não</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Logradouro:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm" maxlength="50" id="Logradouro" placeholder="Logradouro" required data-error="Favor Informar Rua, Avenida etc.">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Número:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-2">
+                                <input type="text" class="form-control input-sm" maxlength="10" id="Numero" placeholder="Número" required data-error="Favor Informar o Número">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Complemento:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                @Html.Editor("Complemento:", "", new { htmlAttributes = new { @class = "form-control input-sm" } })
+                                @Html.ValidationMessage("Complemento", "", new { @class = "text-danger" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("Bairro:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm" maxlength="10" id="Bairro" placeholder="Bairro" required data-error="Favor Informar o Bairro">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                @Html.Label("CEP:", htmlAttributes: new { @class = "control-label titulo-paginas" })
+                            </div>
+                            <div class="col-md-5">
+                                <input type="text" class="form-control input-sm" maxlength="10" id="CEP" placeholder="CEP" required data-error="Favor Informar o CEP">
+                                <div class="help-block with-errors"></div>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                <label for="inputSel" id="estado" class="control-label titulo-paginas">Estado:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-control input-sm" name="selestado" id="Estado" onchange="ObterCidade();" required>
+                                    <option value="">Escolha uma opção</option>
+                                    @{
+                                        foreach (var estado in estados)
+                                        {
+                                            <option value=@estado.Id>@estado.Nome</option>
+                                        }
+                                    }
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                <label for="inputSel" id="cidade" class="control-label titulo-paginas">Cidade:</label>
+                            </div>
+                            <div class="col-sm-4">
+                                <select class="form-control input-sm" id="Cidade" required></select>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <div class="col-sm-3 text-right">
+                                <label for="cadastrar" id="cadastrar" class="control-label titulo-paginas"></label>
+                            </div>
+                            <div class="col-md-offset-3 col-md-10">
+                                <button class="btn btn-padrao-verde" type="button" onclick="SalvarCadastroPacientes();">Salvar<i id="fa-plane" class="fa fa-save" aria-hidden="true" style="padding-left:6px;"></i></button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div>
+</div>
+
+<div class="modal fade" id="cadastroPacienteModalOk" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header panel-heading">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                <h3><i class="glyphicon glyphicon-thumbs-up"></i> Novo Paciente</h3>
+            </div>
+            <div class="modal-body">
+                <p id="modal_nome"></p>
+                <p>Seu cadastro foi realizado com sucesso.</p>
+                <p>Agradecemos a Preferência.</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="Autenticar()" class="btn btn-padrao-verde pull-right" data-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>

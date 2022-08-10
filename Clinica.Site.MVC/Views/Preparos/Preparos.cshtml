@@ -1,0 +1,71 @@
+﻿@model IEnumerable<Clinica.Site.Negocio.Cadastro.Preparo>
+
+@{
+	ViewBag.Title = "Preparos";
+	//Layout = "~/Views/Shared/_Layout.cshtml";
+
+	Char delimitador = '|';
+	String[] array;
+	int i = 0;
+}
+<section class="section section_nossos_exames">
+    <div class="container-fluid">
+        <div class="row row-titulos-paginas">
+            <div class="col-md-12 text-center">
+                <h2 class="font-titulo-paginas"><i class="fa fa-stethoscope fa-1x" aria-hidden="true"></i> Preparo de Exames</h2>
+            </div>
+        </div>
+    </div>
+
+    <div class="section">
+        <div class="container">
+            @*<div class="section">*@
+
+                <table class="table table-responsive" align="center">
+                    <thead class="text-center"></thead>
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            array = item.Descricao.Split(delimitador);
+
+                            if (i % 2 == 0)
+                            {
+
+                                <tr class="bg-responsive-tables">
+                                    <td width="5%"><i class="fa fa-check text-success fa-2x" aria-hidden="true"></i></td>
+                                    <td width="40%">@item.Nome</td>
+                                    <td width="55%" class="hidden-xs">
+                                        <ul>
+                                            @foreach (var valor in array)
+                                            {
+                                                <li class="text-justify">@valor</li>
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                            else
+                            {
+                                <tr class="active">                                    
+                                    <td width="5%"><i class="fa fa-check text-success fa-2x" aria-hidden="true"></i></td>
+                                    <td width="40%">@item.Nome</td>
+                                    <td width="55%" class="hidden-xs">
+                                        <ul>
+                                            @foreach (var valor in array)
+                                            {
+                                                <li class="text-justify">@valor</li>
+                                            }
+                                        </ul>
+                                    </td>
+                                </tr>
+                            }
+                            i++;
+                        }
+                    </tbody>
+                </table>
+            @*</div>*@
+        </div>
+    </div>
+</section>
+
